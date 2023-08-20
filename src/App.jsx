@@ -23,6 +23,12 @@ export default function App() {
     localStorage.setItem("savedUrls", JSON.stringify(newSavedUrls));
   };
 
+  // Clear all saved URLs from state and Local Storage
+  const clearSavedUrls = () => {
+    setSavedUrls([]);
+    localStorage.removeItem("savedUrls");
+  };
+
   const sendRequest = async () => {
     try {
       const options = {
@@ -109,6 +115,9 @@ export default function App() {
       </button>
       <button onClick={saveUrl} style={buttonStyle}>
         Save URL
+      </button>
+      <button onClick={clearSavedUrls} style={buttonStyle}>
+        Clear Saved URLs
       </button>
       <pre style={responseStyle}>{response}</pre>
       <div>
