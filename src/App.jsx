@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function App() {
   const [url, setUrl] = useState("https://randomuser.me/api");
@@ -6,6 +6,22 @@ export default function App() {
   const [headers, setHeaders] = useState("{}");
   const [parameters, setParameters] = useState("");
   const [response, setResponse] = useState("");
+  const [savedUrls, setSavedUrls] = useState([]);
+
+  // Load saved URLs from Local Storage on initial load
+  useEffect(() => {
+    const savedUrlsString = localStorage.getItem("savedUrls");
+    if (savedUrlsString) {
+      setSavedUrls(JSON.parse(savedUrlsString));
+    }
+  }, []);
+
+  // Save the current URL to Local Storage
+  const saveUrl = () => {
+    const newSavedUrls = [...savedUrls, url];
+    setSavedUrls(newSavedUrls);
+    localStorage.setItem("savedUrls", JSON.stringify(newSavedUrls));
+  };
 
   const sendRequest = async () => {
     try {
@@ -41,6 +57,7 @@ export default function App() {
     color: "#fff",
     border: "none",
     cursor: "pointer",
+    marginRight: "10px",
   };
 
   const responseStyle = {
@@ -90,7 +107,18 @@ export default function App() {
       <button onClick={sendRequest} style={buttonStyle}>
         Send Request
       </button>
+      <button onClick={saveUrl} style={buttonStyle}>
+        Save URL
+      </button>
       <pre style={responseStyle}>{response}</pre>
+      <div>
+        <h2>Saved URLs</h2>
+        <ul>
+          {savedUrls.map((savedUrl, index) => (
+            <li key={index}>{savedUrl}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
