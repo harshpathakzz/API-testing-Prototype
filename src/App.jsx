@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { prism } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default function App() {
   const [url, setUrl] = useState("https://randomuser.me/api");
@@ -92,7 +94,11 @@ export default function App() {
       <button onClick={sendRequest} style={buttonStyle}>
         Send Request
       </button>
-      <pre style={responseStyle}>{response}</pre>
+      <pre style={responseStyle}>
+        <SyntaxHighlighter language="json" style={prism}>
+          {response}
+        </SyntaxHighlighter>
+      </pre>
     </div>
   );
 }
