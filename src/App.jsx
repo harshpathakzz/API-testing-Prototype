@@ -49,6 +49,7 @@ export default function App() {
     border: "1px solid #ddd",
     borderRadius: "5px",
     fontSize: "14px",
+    textAlign: "left",
     whiteSpace: "pre-wrap",
   };
 
