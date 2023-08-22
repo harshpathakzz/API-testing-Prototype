@@ -9,6 +9,7 @@ export default function App() {
   const [parameters, setParameters] = useState("");
   const [authToken, setAuthToken] = useState("");
   const [response, setResponse] = useState("");
+  const [contentType, setContentType] = useState("application/json");
 
   const sendRequest = async () => {
     try {
@@ -17,6 +18,7 @@ export default function App() {
         headers: {
           ...JSON.parse(headers),
           Authorization: `Bearer ${authToken}`,
+          "Content-Type": contentType,
         },
       };
 
@@ -102,6 +104,15 @@ export default function App() {
         onChange={(e) => setAuthToken(e.target.value)}
         style={inputStyle}
       />
+      <br />
+      <select
+        value={contentType}
+        onChange={(e) => setContentType(e.target.value)}
+        style={inputStyle}
+      >
+        <option value="application/json">JSON</option>
+        <option value="application/x-www-form-urlencoded">Form Data</option>
+      </select>
       <br />
       <button onClick={sendRequest} style={buttonStyle}>
         Send Request
