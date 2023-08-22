@@ -7,13 +7,17 @@ export default function App() {
   const [method, setMethod] = useState("GET");
   const [headers, setHeaders] = useState("{}");
   const [parameters, setParameters] = useState("");
+  const [authToken, setAuthToken] = useState("");
   const [response, setResponse] = useState("");
 
   const sendRequest = async () => {
     try {
       const options = {
         method,
-        headers: JSON.parse(headers),
+        headers: {
+          ...JSON.parse(headers),
+          Authorization: `Bearer ${authToken}`,
+        },
       };
 
       const apiUrl = new URL(url);
@@ -88,6 +92,14 @@ export default function App() {
         placeholder="Enter Parameters (Key=Value format)"
         value={parameters}
         onChange={(e) => setParameters(e.target.value)}
+        style={inputStyle}
+      />
+      <br />
+      <input
+        type="text"
+        placeholder="Enter Authentication Token/API Key"
+        value={authToken}
+        onChange={(e) => setAuthToken(e.target.value)}
         style={inputStyle}
       />
       <br />
