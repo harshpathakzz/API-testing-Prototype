@@ -57,8 +57,9 @@
 }
 
 .send-button {
+  margin-top: 2%;
   display: block; /* Change to block to take full width */
-  width: 100%;
+  width: 10%;
   padding: 15px 0; /* Adjust padding for top and bottom */
   background-color: #007bff;
   color: #fff;

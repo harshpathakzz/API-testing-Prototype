@@ -80,6 +80,13 @@ export default function App() {
         onChange={(e) => setParameters(e.target.value)}
         className="textarea"
       />
+
+      <textarea
+        placeholder="Enter Request Body (JSON format)"
+        value={requestBody}
+        onChange={(e) => setRequestBody(e.target.value)}
+        className="textarea"
+      />
       <input
         type="text"
         placeholder="Enter Authentication Token/API Key"
@@ -95,12 +102,7 @@ export default function App() {
         <option value="application/json">JSON</option>
         <option value="application/x-www-form-urlencoded">Form Data</option>
       </select>
-      <textarea
-        placeholder="Enter Request Body (JSON format)"
-        value={requestBody}
-        onChange={(e) => setRequestBody(e.target.value)}
-        className="textarea"
-      />
+
       <button onClick={sendRequest} className="send-button">
         Send Request
       </button>
